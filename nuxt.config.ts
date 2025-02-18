@@ -52,6 +52,8 @@ export default defineNuxtConfig({
   experimental: {
     payloadExtraction: false,
     renderJsonPayloads: true,
+    bundler: 'vite',
+    noVueServer: true,
   },
   css: [
     '@unocss/reset/tailwind.css',
@@ -92,6 +94,17 @@ export default defineNuxtConfig({
     },
     build: {
       target: 'esnext',
+      minify: false,
+      mode: 'development',
+      modulePreload: false,
+      rollupOptions: {
+        output: {
+          format: 'esm',
+          entryFileNames: '[name].js',
+          chunkFileNames: '[name].js',
+          assetFileNames: '[name][extname]',
+        },
+      },
     },
     optimizeDeps: {
       include: [
